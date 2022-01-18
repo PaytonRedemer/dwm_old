@@ -8,6 +8,7 @@ Patches
 
 * xresources
 * vanitygaps with cfacts
+* stacker
 
 Requirements
 ------------
