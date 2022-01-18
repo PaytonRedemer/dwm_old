@@ -9,6 +9,7 @@ Patches
 * xresources
 * vanitygaps with cfacts
 * stacker
+* fullscreen
 
 Requirements
 ------------
