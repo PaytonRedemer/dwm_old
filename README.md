@@ -12,6 +12,7 @@ Patches
 * fullscreen
 * sticky
 * attachbottom
+* pertag
 
 Requirements
 ------------
