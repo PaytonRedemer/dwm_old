@@ -11,6 +11,7 @@ Patches
 * stacker
 * fullscreen
 * sticky
+* attachbottom
 
 Requirements
 ------------
