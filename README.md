@@ -13,6 +13,7 @@ Patches
 * sticky
 * attachbottom
 * pertag
+* statusallmons
 
 Requirements
 ------------
