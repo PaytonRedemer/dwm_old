@@ -7,6 +7,7 @@ Patches
 -------
 
 * xresources
+* vanitygaps with cfacts
 
 Requirements
 ------------
