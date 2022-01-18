@@ -1,38 +1,19 @@
 --- dwm.c
 +++ dwm.c
-@@ -841,27 +849,16 @@ focusmon(const Arg *arg)
- void
- focusstack(const Arg *arg)
- {
--	Client *c = NULL, *i;
-+	int i = stackpos(arg);
-+	Client *c, *p;
- 
--	if (!selmon->sel)
-+	if(i < 0)
- 		return;
--	if (arg->i > 0) {
--		for (c = selmon->sel->next; c && !ISVISIBLE(c); c = c->next);
--		if (!c)
--			for (c = selmon->clients; c && !ISVISIBLE(c); c = c->next);
--	} else {
--		for (i = selmon->clients; i != selmon->sel; i = i->next)
--			if (ISVISIBLE(i))
--				c = i;
--		if (!c)
--			for (; i; i = i->next)
--				if (ISVISIBLE(i))
--					c = i;
--	}
--	if (c) {
--		focus(c);
--		restack(selmon);
--	}
-+
-+	for(p = NULL, c = selmon->clients; c && (i || !ISVISIBLE(c));
-+	    i -= ISVISIBLE(c) ? 1 : 0, p = c, c = c->next);
-+	focus(c ? c : p);
-+	restack(selmon);
- }
- 
- Atom
+@@ -49,7 +49,7 @@
+ #define CLEANMASK(mask)         (mask & ~(numlockmask|LockMask) & (ShiftMask|ControlMask|Mod1Mask|Mod2Mask|Mod3Mask|Mod4Mask|Mod5Mask))
+ #define INTERSECT(x,y,w,h,m)    (MAX(0, MIN((x)+(w),(m)->wx+(m)->ww) - MAX((x),(m)->wx)) \
+                                * MAX(0, MIN((y)+(h),(m)->wy+(m)->wh) - MAX((y),(m)->wy)))
+-#define ISVISIBLE(C)            ((C->tags & C->mon->tagset[C->mon->seltags]))
++#define ISVISIBLE(C)            ((C->tags & C->mon->tagset[C->mon->seltags]) || C->issticky)
+ #define LENGTH(X)               (sizeof X / sizeof X[0])
+ #define MOUSEMASK               (BUTTONMASK|PointerMotionMask)
+ #define WIDTH(X)                ((X)->w + 2 * (X)->bw)
+@@ -211,6 +211,7 @@ static void tagmon(const Arg *arg);
+ static void tile(Monitor *);
+ static void togglebar(const Arg *arg);
+ static void togglefloating(const Arg *arg);
++static void togglesticky(const Arg *arg);
+ static void toggletag(const Arg *arg);
+ static void toggleview(const Arg *arg);
+ static void unfocus(Client *c, int setfocus);

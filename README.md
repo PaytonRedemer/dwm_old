@@ -10,6 +10,7 @@ Patches
 * vanitygaps with cfacts
 * stacker
 * fullscreen
+* sticky
 
 Requirements
 ------------
