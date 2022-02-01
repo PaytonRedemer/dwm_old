@@ -14,6 +14,7 @@ Patches
 * attachbottom
 * pertag
 * statusallmons
+* systray
 
 Requirements
 ------------
